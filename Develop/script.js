@@ -3,16 +3,31 @@
 // in the html.
 $(document).ready(function () {
   
-  //Grabs current date
+  // Grabs current date
   var currentDate = dayjs().format('dddd, MMMM D, YYYY');
   $('#currentDay').text(currentDate);
 
-  //Grabs current hour
+  // Grabs current hour
   var currentHour = dayjs().hour();
 
-  console.log(currentDate)
-  console.log(currentHour)
+  // Iterates through elements with a class of "time-block", extracts the id (which indicates the hour), splits the string at they hyphen, accesses the second element of the array (the hour), and parses the hour into an integer.
+  $('.time-block').each(function () {
+    var blockHour = parseInt($(this).attr('id').split('-')[1]);
+    
+    // Compares the block's hour with the current hour. Depending on whether it's in the past, present, or future, the appropriate class will be applied. 
+    if (blockHour < currentHour) {
+      $(this).removeClass('present future').addClass('past');
+    } else if (blockHour === currentHour) {
+      $(this).removeClass('past future').addClass('present');
+    } else {
+      $(this).removeClass('past present').addClass('future');
+    }
+  });
 
+  // TROLL NOTE
+  
+
+  
 
 
 

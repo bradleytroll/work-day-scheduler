@@ -15,11 +15,12 @@ $(document).ready(function () {
 
   // Creates time blocks for each hour. TROLL NOTES: FINISH NOTES HERE
   businessHours.forEach(function (hour) {
+    var formattedHour = (hour > 12 ? hour - 12 : hour) + (hour >= 12 ? 'PM' : 'AM');
     var timeBlock = $('<div>').addClass('row time-block').attr('id', 'hour-' + hour);
-    timeBlock.append($('<div>').addClass('col-2 col-md-1 hour text-center py-3').text(hour + 'AM'));
+    timeBlock.append($('<div>').addClass('col-2 col-md-1 hour text-center py-3').text(formattedHour));
     timeBlock.append($('<textarea>').addClass('col-8 col-md-10 description').attr('rows', '3'));
     timeBlock.append($('<button>').addClass('btn saveBtn col-2 col-md-1').attr('aria-label', 'save').html('<i class="fas fa-save" aria-hidden="true"></i>'));
-
+  
     container.append(timeBlock);
   });
 

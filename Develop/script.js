@@ -13,6 +13,7 @@ $(document).ready(function () {
   });
   var container = $('.container-fluid');
 
+  // Creates time blocks for each hour. TROLL NOTES: FINISH NOTES HERE
   businessHours.forEach(function (hour) {
     var timeBlock = $('<div>').addClass('row time-block').attr('id', 'hour-' + hour);
     timeBlock.append($('<div>').addClass('col-2 col-md-1 hour text-center py-3').text(hour + 'AM'));
@@ -22,6 +23,14 @@ $(document).ready(function () {
     container.append(timeBlock);
   });
 
+  // Loads any saved events from local storage and populates the events in the appropriate hour blocks.
+  $('.time-block').each(function () {
+    var blockId = $(this).attr('id');
+    var storedData = localStorage.getItem(blockId);
+    if (storedData) {
+      $(this).find('.description').val(storedData);
+    }
+  });
 
   // Grabs current hour
   var currentHour = dayjs().hour();
@@ -53,6 +62,12 @@ $(document).ready(function () {
 
 
 
+});
+
+
+
+
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -71,5 +86,3 @@ $(document).ready(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-});
-

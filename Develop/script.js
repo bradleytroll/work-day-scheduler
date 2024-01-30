@@ -7,6 +7,22 @@ $(document).ready(function () {
   var currentDate = dayjs().format('dddd, MMMM D, YYYY');
   $('#currentDay').text(currentDate);
 
+  // Creates a full day of time blocks from 9am to 5pm.
+  var businessHours = Array.from({ length: 9 }, function (_, index) {
+    return index + 9;
+  });
+  var container = $('.container-fluid');
+
+  businessHours.forEach(function (hour) {
+    var timeBlock = $('<div>').addClass('row time-block').attr('id', 'hour-' + hour);
+    timeBlock.append($('<div>').addClass('col-2 col-md-1 hour text-center py-3').text(hour + 'AM'));
+    timeBlock.append($('<textarea>').addClass('col-8 col-md-10 description').attr('rows', '3'));
+    timeBlock.append($('<button>').addClass('btn saveBtn col-2 col-md-1').attr('aria-label', 'save').html('<i class="fas fa-save" aria-hidden="true"></i>'));
+
+    container.append(timeBlock);
+  });
+
+
   // Grabs current hour
   var currentHour = dayjs().hour();
 
@@ -24,8 +40,14 @@ $(document).ready(function () {
     }
   });
 
-  // TROLL NOTE
-  
+  // Attaches an event listener to a button that, when clicked, saves the parent id (time block) and the user's input to local storage in a key value pair.
+  $('.saveBtn').on('click', function () {
+    var blockId = $(this).parent().attr('id');
+    var userInput = $(this).siblings('.description').val();
+
+    localStorage.setItem(blockId, userInput);
+  });
+
 
   
 

@@ -35,4 +35,4 @@ The **Work Day Scheduler** is a simple calendar app designed to help users sched
 
 Github Repo: https://github.com/bradleytroll/work-day-scheduler
 
-Live Link: 
+Live Link: https://bradleytroll.github.io/work-day-scheduler/

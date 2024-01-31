@@ -1,6 +1,6 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
+// Wraps all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
-// in the html.
+// in the HTML.
 $(document).ready(function () {
   
   // Grabs current date
@@ -13,7 +13,7 @@ $(document).ready(function () {
   });
   var container = $('.container-fluid');
 
-  // Creates time blocks for each hour. TROLL NOTES: FINISH NOTES HERE
+  // Creates time blocks for each hour. Iterates through the businessHours array, creates the time blocks, decides if AM or PM is needed, and appends time blocks to the DOM.
   businessHours.forEach(function (hour) {
     var formattedHour = (hour > 12 ? hour - 12 : hour) + (hour >= 12 ? 'PM' : 'AM');
     var timeBlock = $('<div>').addClass('row time-block').attr('id', 'hour-' + hour);
